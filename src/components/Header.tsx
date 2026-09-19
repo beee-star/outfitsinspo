@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { to: "/lookbook", label: "Lookbook" },
@@ -31,7 +32,7 @@ export default function Header() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         transparent
           ? "bg-transparent border-b border-transparent"
-          : "bg-white border-b border-border shadow-sm"
+          : "bg-background border-b border-border shadow-sm"
       )}
     >
       <div className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
@@ -65,6 +66,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-5">
+          <ThemeToggle transparent={transparent} />
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <Instagram className={cn("w-[18px] h-[18px] transition-colors", transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground")} />
           </a>
@@ -72,6 +74,7 @@ export default function Header() {
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-4">
+          <ThemeToggle transparent={transparent} />
           <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             {mobileOpen
               ? <X className={cn("w-6 h-6", transparent ? "text-white" : "text-foreground")} />
@@ -83,7 +86,7 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <nav className="md:hidden border-t border-border bg-white px-6 py-6 space-y-4">
+        <nav className="md:hidden border-t border-border bg-background px-6 py-6 space-y-4">
           {navLinks.map(link => (
             <Link
               key={link.to}
