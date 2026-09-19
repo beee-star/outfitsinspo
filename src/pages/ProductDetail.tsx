@@ -1,85 +1,88 @@
 import { useParams, Navigate, Link } from "react-router-dom";
-import { useState } from "react";
-import { getProductBySlug, getRelatedProducts } from "@/data/products";
-import { useCart } from "@/context/CartContext";
+import { getLookBySlug, getRelatedLooks } from "@/data/looks";
 import { useToast } from "@/hooks/use-toast";
-import QuantitySelector from "@/components/QuantitySelector";
-import ProductCard from "@/components/ProductCard";
+import LookCard from "@/components/LookCard";
 
-export default function ProductDetail() {
+export default function LookDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const product = getProductBySlug(slug || "");
-  const { addItem } = useCart();
+  const look = getLookBySlug(slug || "");
   const { toast } = useToast();
-  const [quantity, setQuantity] = useState(1);
 
-  if (!product) return <Navigate to="/shop" replace />;
+  if (!look) return <Navigate to="/lookbook" replace />;
 
-  const related = getRelatedProducts(product.slug, 3);
-  const isSoldOut = product.badge === "sold-out";
+  const related = getRelatedLooks(look.slug, 3);
 
-  const handleAddToCart = () => {
-    if (isSoldOut) return;
-    addItem({ slug: product.slug, name: product.name, price: product.price, image: product.image }, quantity);
+  const handleSave = () => {
     toast({
-      title: "Added to cart",
-      description: `${quantity}× ${product.name} added to your cart.`,
+      title: "Saved to your wishlist",
+      description: `${look.name} added to your saved looks.`,
     });
-    setQuantity(1);
   };
 
   return (
     <>
       <section className="max-w-6xl mx-auto px-6 py-8">
         <nav className="text-sm text-muted-foreground mb-6">
-          <Link to="/shop" className="hover:text-foreground transition-colors">Shop</Link>
+          <Link to="/lookbook" className="hover:text-foreground transition-colors">Lookbook</Link>
           <span className="mx-2">›</span>
-          <span className="text-foreground">{product.name}</span>
+          <span className="text-foreground">{look.name}</span>
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Image */}
           <div className="w-full aspect-[4/5] bg-warm-bg">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+            <img src={look.image} alt={look.name} className="w-full h-full object-cover" />
           </div>
 
           {/* Info */}
           <div className="flex flex-col">
-            <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-wide text-foreground mb-4">{product.name}</h1>
-            <p className="text-4xl md:text-5xl font-bold text-foreground mb-6">${product.price.toFixed(2)}</p>
-            {product.availability && (
-              <p className="text-sm text-accent font-medium mb-4">{product.availability}</p>
-            )}
-            <p className="text-base leading-relaxed text-muted-foreground mb-8">{product.description}</p>
+            <div className="flex flex-wrap gap-2 mb-4">
+              <span className="text-[11px] uppercase tracking-wider px-3 py-1 bg-secondary text-secondary-foreground">{look.occasion}</span>
+              <span className="text-[11px] uppercase tracking-wider px-3 py-1 bg-secondary text-secondary-foreground">{look.warmth}</span>
+              <span className="text-[11px] uppercase tracking-wider px-3 py-1 bg-secondary text-secondary-foreground">{look.weather}</span>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-light text-foreground mb-6">{look.name}</h1>
+            <p className="text-base leading-relaxed text-muted-foreground mb-6">{look.description}</p>
 
-            {!isSoldOut ? (
-              <div className="flex items-stretch gap-3">
-                <QuantitySelector quantity={quantity} onChange={setQuantity} />
-                <button
-                  onClick={handleAddToCart}
-                  className="flex-1 py-3 bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-                >
-                  Add To Cart
-                </button>
-              </div>
-            ) : (
-              <button
-                disabled
-                className="w-full py-3 bg-muted text-muted-foreground text-sm font-medium cursor-not-allowed"
-              >
-                Sold Out
-              </button>
-            )}
+            <div className="mb-8">
+              <h2 className="text-sm uppercase tracking-wider text-foreground mb-3">How to style it</h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">{look.styling}</p>
+            </div>
+
+            <button
+              onClick={handleSave}
+              className="self-start px-8 py-3 bg-primary text-primary-foreground text-sm font-medium uppercase tracking-wider hover:opacity-90 transition-opacity"
+            >
+              Save look
+            </button>
           </div>
         </div>
       </section>
 
+      {/* The Pieces */}
+      <section className="max-w-6xl mx-auto px-6 py-12">
+        <h2 className="text-sm uppercase tracking-wider text-foreground mb-6">The Pieces</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+          {look.pieces.map((piece, i) => (
+            <div key={i}>
+              <div className="bg-[hsl(var(--warm-bg))] aspect-square overflow-hidden mb-3">
+                <img src={piece.image} alt={piece.name} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <p className="text-sm text-foreground">{piece.name}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-muted-foreground mt-6 max-w-xl leading-relaxed">
+          Baridi is a styling lookbook for inspiration. Piece names are descriptive — find similar items from your favourite makers and retailers.
+        </p>
+      </section>
+
       {related.length > 0 && (
         <section className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="text-2xl font-light text-foreground mb-8">You Might Also Like</h2>
+          <h2 className="text-2xl font-light text-foreground mb-8">More looks to try</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {related.map(p => (
-              <ProductCard key={p.slug} product={p} />
+            {related.map(l => (
+              <LookCard key={l.slug} look={l} />
             ))}
           </div>
         </section>
