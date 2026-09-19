@@ -14,7 +14,7 @@ export default function NewsletterSignup() {
     console.log("Newsletter signup:", email);
     toast({
       title: "You're subscribed!",
-      description: "Thank you for signing up for our Monthly Dispatch.",
+      description: "New looks and styling notes will arrive with each seasonal dispatch.",
     });
     setEmail("");
     setIsSubmitting(false);
@@ -27,8 +27,8 @@ export default function NewsletterSignup() {
     >
       <div className="absolute inset-0 bg-foreground/40" />
       <div className="relative z-10 max-w-md mx-auto text-center text-white">
-        <h2 className="text-3xl md:text-4xl font-light mb-3 tracking-wide">Monthly Dispatch</h2>
-        <p className="text-sm mb-8 text-white/80">Sign up to receive news and updates.</p>
+        <h2 className="text-3xl md:text-4xl font-light mb-3 tracking-wide">Seasonal Dispatch</h2>
+        <p className="text-sm mb-8 text-white/80">New looks and styling notes, delivered as the season turns.</p>
         <form onSubmit={handleSubmit} className="flex gap-0">
           <input
             type="email"

@@ -1,18 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, Instagram } from "lucide-react";
-import { useCart } from "@/context/CartContext";
+import { Menu, X, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { to: "/shop", label: "Shop" },
+  { to: "/lookbook", label: "Lookbook" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
-  
 ];
 
 export default function Header() {
-  const { totalItems } = useCart();
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -41,11 +38,11 @@ export default function Header() {
         <Link
           to="/"
           className={cn(
-            "text-2xl font-light tracking-wide transition-colors",
+            "text-2xl font-light tracking-[0.2em] uppercase transition-colors",
             transparent ? "text-white" : "text-foreground"
           )}
         >
-          Terra Studios
+          Baridi
         </Link>
 
         {/* Desktop nav */}
@@ -71,26 +68,10 @@ export default function Header() {
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
             <Instagram className={cn("w-[18px] h-[18px] transition-colors", transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground")} />
           </a>
-          <Link to="/cart" className="relative" aria-label="Shopping cart">
-            <ShoppingCart className={cn("w-[18px] h-[18px] transition-colors", transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground")} />
-            {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-[10px] w-[18px] h-[18px] rounded-full flex items-center justify-center font-medium">
-                {totalItems}
-              </span>
-            )}
-          </Link>
         </div>
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-4">
-          <Link to="/cart" className="relative" aria-label="Shopping cart">
-            <ShoppingCart className={cn("w-5 h-5 transition-colors", transparent ? "text-white" : "text-foreground")} />
-            {totalItems > 0 && (
-              <span className="absolute -top-2 -right-2 bg-accent text-accent-foreground text-[10px] w-[18px] h-[18px] rounded-full flex items-center justify-center font-medium">
-                {totalItems}
-              </span>
-            )}
-          </Link>
           <button onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             {mobileOpen
               ? <X className={cn("w-6 h-6", transparent ? "text-white" : "text-foreground")} />
