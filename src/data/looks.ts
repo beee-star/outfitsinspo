@@ -5,6 +5,9 @@ import eveningLayer from "@/assets/looks/evening-layer.jpg";
 import heritageLayer from "@/assets/looks/heritage-layer.jpg";
 import officeCozy from "@/assets/looks/office-cozy.jpg";
 import slowMorning from "@/assets/looks/slow-morning.jpg";
+import cityDusk from "@/assets/looks/city-dusk.jpg";
+import highlandEscape from "@/assets/looks/highland-escape.jpg";
+import cafeHours from "@/assets/looks/cafe-hours.jpg";
 
 import cardiganImg from "@/assets/products/spring-blade.jpg";
 import cableSweaterImg from "@/assets/products/classic-set.jpg";
@@ -141,20 +144,62 @@ export const looks: Look[] = [
       "Comfort is the only rule. Layer the cardigan open and let the wrap gather at the elbows.",
     pieces: [p.cardigan, p.socks, p.wrap],
   },
+  {
+    slug: "city-dusk",
+    name: "City Dusk",
+    image: cityDusk,
+    occasion: "After work",
+    warmth: "Warm",
+    weather: "Cold, wet evenings",
+    description:
+      "A long camel coat over a cream turtleneck, cut clean with wide charcoal trousers. Made for wet pavements and the drop in temperature once the city lights come on.",
+    styling:
+      "Keep the coat open for length and let the turtleneck do the warming. One belt, one boot, nothing else competing.",
+    pieces: [p.cableSweater, p.wrap, p.socks],
+    badge: "new",
+  },
+  {
+    slug: "highland-escape",
+    name: "Highland Escape",
+    image: highlandEscape,
+    occasion: "Out of town",
+    warmth: "Heavy",
+    weather: "Cold, windy highlands",
+    description:
+      "A rust quilted gilet over an oatmeal chunky knit hoodie — built for tea-country mist, hard wind and long walks that start before the fog clears.",
+    styling:
+      "Let the knit sleeves show past the gilet. Cuff the denim over sturdy boots so the mud stays where it belongs.",
+    pieces: [p.pullover, p.vest, p.mittens],
+    badge: "editor",
+  },
+  {
+    slug: "cafe-hours",
+    name: "Café Hours",
+    image: cafeHours,
+    occasion: "Rainy afternoons",
+    warmth: "Cozy",
+    weather: "Steady rain",
+    description:
+      "An oversized mustard and charcoal blanket scarf thrown over a long cream knit dress — the look for waiting out a downpour with something hot in hand.",
+    styling:
+      "Wear the blanket scarf like a cape, gathered at one shoulder. Keep everything underneath in one quiet tone.",
+    pieces: [p.scarfSet, p.wrap, p.socks],
+    badge: "new",
+  },
 ];
 
 export const featuredLooks = [
   looks.find(l => l.slug === "morning-commute")!,
-  looks.find(l => l.slug === "heritage-layer")!,
-  looks.find(l => l.slug === "rainy-day-edit")!,
+  looks.find(l => l.slug === "highland-escape")!,
+  looks.find(l => l.slug === "city-dusk")!,
 ];
 
 export const coldLayeringLooks = looks.filter(l =>
-  ["morning-commute", "evening-layer", "office-cozy", "slow-morning"].includes(l.slug)
+  ["morning-commute", "evening-layer", "office-cozy", "slow-morning", "highland-escape", "city-dusk"].includes(l.slug)
 );
 
 export const rainReadyLooks = looks.filter(l =>
-  ["rainy-day-edit", "weekend-warmth", "heritage-layer"].includes(l.slug)
+  ["rainy-day-edit", "weekend-warmth", "heritage-layer", "cafe-hours"].includes(l.slug)
 );
 
 export function getLookBySlug(slug: string): Look | undefined {
