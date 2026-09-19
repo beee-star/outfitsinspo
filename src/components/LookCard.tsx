@@ -20,7 +20,7 @@ export default function LookCard({ look }: { look: Look }) {
         />
         <div className="absolute top-3 left-3 flex gap-2">
           {look.badge === "editor" && (
-            <span className="bg-white/90 text-foreground text-[10px] uppercase tracking-wider px-2 py-1">Editor's pick</span>
+            <span className="bg-background/90 text-foreground text-[10px] uppercase tracking-wider px-2 py-1">Editor's pick</span>
           )}
           {look.badge === "new" && (
             <span className="bg-accent text-accent-foreground text-[10px] uppercase tracking-wider px-2 py-1">New</span>
