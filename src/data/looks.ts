@@ -5,6 +5,9 @@ import eveningLayer from "@/assets/looks/evening-layer.jpg";
 import heritageLayer from "@/assets/looks/heritage-layer.jpg";
 import officeCozy from "@/assets/looks/office-cozy.jpg";
 import slowMorning from "@/assets/looks/slow-morning.jpg";
+import cityDusk from "@/assets/looks/city-dusk.jpg";
+import highlandEscape from "@/assets/looks/highland-escape.jpg";
+import cafeHours from "@/assets/looks/cafe-hours.jpg";
 
 import cardiganImg from "@/assets/products/spring-blade.jpg";
 import cableSweaterImg from "@/assets/products/classic-set.jpg";
