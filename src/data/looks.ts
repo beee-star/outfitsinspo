@@ -190,16 +190,16 @@ export const looks: Look[] = [
 
 export const featuredLooks = [
   looks.find(l => l.slug === "morning-commute")!,
-  looks.find(l => l.slug === "heritage-layer")!,
-  looks.find(l => l.slug === "rainy-day-edit")!,
+  looks.find(l => l.slug === "highland-escape")!,
+  looks.find(l => l.slug === "city-dusk")!,
 ];
 
 export const coldLayeringLooks = looks.filter(l =>
-  ["morning-commute", "evening-layer", "office-cozy", "slow-morning"].includes(l.slug)
+  ["morning-commute", "evening-layer", "office-cozy", "slow-morning", "highland-escape", "city-dusk"].includes(l.slug)
 );
 
 export const rainReadyLooks = looks.filter(l =>
-  ["rainy-day-edit", "weekend-warmth", "heritage-layer"].includes(l.slug)
+  ["rainy-day-edit", "weekend-warmth", "heritage-layer", "cafe-hours"].includes(l.slug)
 );
 
 export function getLookBySlug(slug: string): Look | undefined {
