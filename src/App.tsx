@@ -9,8 +9,6 @@ import Index from "./pages/Index";
 import Shop from "./pages/Shop";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
-import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
 import CoreCollection from "./pages/CoreCollection";
 import SetsAndPairs from "./pages/SetsAndPairs";
@@ -28,14 +26,12 @@ const App = () => (
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
-              <Route path="/shop" element={<Shop />} />
+              <Route path="/lookbook" element={<Shop />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
-              
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/product/:slug" element={<ProductDetail />} />
-              <Route path="/collections/core" element={<CoreCollection />} />
-              <Route path="/collections/sets-and-pairs" element={<SetsAndPairs />} />
+              <Route path="/look/:slug" element={<ProductDetail />} />
+              <Route path="/collections/cold-layering" element={<CoreCollection />} />
+              <Route path="/collections/rain-ready" element={<SetsAndPairs />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
